@@ -15,7 +15,7 @@ release_list = [
     (373937292739, "barry")
               ]
 
-#inserts rows
+#inserts/adds rows
 cursor.executemany("insert into contacts values (?, ?)", release_list)
               
 #store files permanently
