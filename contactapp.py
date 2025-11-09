@@ -11,7 +11,8 @@ cursor.execute("create table contacts (number integer, name text)")
 release_list = [
     (78392748291, "family"),
     (36392738263, "friend"),
-    (272027393729, "chuck")
+    (272027393729, "chuck"),
+    (373937292739, "barry")
               ]
 
 cursor.executemany("insert into contacts values (?, ?)", release_list)
