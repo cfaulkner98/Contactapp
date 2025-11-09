@@ -15,6 +15,7 @@ release_list = [
     (373937292739, "barry")
               ]
 
+#inserts rows
 cursor.executemany("insert into contacts values (?, ?)", release_list)
               
 #store files permanently
@@ -24,7 +25,7 @@ connection.commit()
 for row in cursor.execute("select * from contacts"):
     print(row)
 
-#print certain rows
+#print/search certain rows
 print("*******")
 cursor.execute("select * from contacts where name = :f", {"f": "friend"})
 contacts_search = cursor.fetchall()
