@@ -1,5 +1,9 @@
 import sqlite3
 
+
+# UNIQUE constraint block duplicates
+
+
 connection = sqlite3.connect("Contactapp.db")
 cursor = connection.cursor()
 
@@ -7,6 +11,14 @@ cursor = connection.cursor()
 cursor.execute("create table IF NOT EXISTS contacts (number text, name text)")
 
 #index to find info faster
+
+
+# add/insert contacts 
+
+
+#search by name 
+
+#menu
 
 
 #information in my table
@@ -33,7 +45,7 @@ for row in cursor.execute("select * from contacts"):
 
 #print/search certain rows
 print("*******")
-cursor.execute("select * from contacts where name = :b", {"b": "barry"})
+cursor.execute("select * from contacts where name = :c", {"c": "chuck"})
 contacts_search = cursor.fetchall()
 print("contacts_search =", contacts_search)
 
