@@ -6,6 +6,8 @@ cursor = connection.cursor()
 #create table and allow reruns 
 cursor.execute("create table IF NOT EXISTS contacts (number text, name text)")
 
+#index to find info faster
+
 
 #information in my table
 release_list = [
@@ -31,7 +33,7 @@ for row in cursor.execute("select * from contacts"):
 
 #print/search certain rows
 print("*******")
-cursor.execute("select * from contacts where name = :f", {"f": "friend"})
+cursor.execute("select * from contacts where name = :b", {"b": "barry"})
 contacts_search = cursor.fetchall()
 print("contacts_search =", contacts_search)
 
