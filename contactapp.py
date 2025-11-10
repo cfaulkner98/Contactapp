@@ -3,8 +3,8 @@ import sqlite3
 connection = sqlite3.connect("Contactapp.db")
 cursor = connection.cursor()
 
-#create table
-cursor.execute("create table contacts (number integer, name text)")
+#create table and allow reruns 
+cursor.execute("create table IF NOT EXISTS contacts (number text, name text)")
 
 
 #information in my table
@@ -17,6 +17,10 @@ release_list = [
 
 #inserts/adds rows
 cursor.executemany("insert into contacts values (?, ?)", release_list)
+
+#delete rows
+
+#update rows
               
 #store files permanently
 connection.commit()
