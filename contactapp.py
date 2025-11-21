@@ -46,7 +46,7 @@ for row in cursor.execute("select * from contacts"):
 
 #print/search certain rows
 print("*******")
-cursor.execute("select * from contacts where name = :b", {"b": "barry"})
+cursor.execute("select * from contacts where name = :c", {"c": "chuck"})
 contacts_search = cursor.fetchall()
 print("contacts_search =", contacts_search)
 
