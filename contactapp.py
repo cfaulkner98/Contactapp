@@ -21,12 +21,13 @@ cursor.execute("create table IF NOT EXISTS contacts (number text, name text)")
 #menu
 
 
-#information in my table
+#information in table
 release_list = [
     (78392748291, "family"),
     (36392738263, "friend"),
     (272027393729, "chuck"),
-    (373937292739, "barry")
+    (373937292739, "barry"),
+    (392729182038, "charlie")
               ]
 
 #inserts/adds rows
@@ -45,8 +46,10 @@ for row in cursor.execute("select * from contacts"):
 
 #print/search certain rows
 print("*******")
-cursor.execute("select * from contacts where name = :c", {"c": "chuck"})
+cursor.execute("select * from contacts where name = :b", {"b": "barry"})
 contacts_search = cursor.fetchall()
 print("contacts_search =", contacts_search)
+
+
 
 connection.close()
