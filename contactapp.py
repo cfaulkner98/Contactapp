@@ -2,13 +2,30 @@ import sqlite3
 
 
 # UNIQUE constraint block duplicates
+class contactapp:
+    
+    def __init__(self):
+        connection = sqlite3.connect("Contactapp.db")
+        cursor = connection.cursor()
 
+        #create table and allow reruns
+        cursor.execute("create table IF NOT EXISTS contacts (id int primary key, number text, name text)")
 
-connection = sqlite3.connect("Contactapp.db")
-cursor = connection.cursor()
+        #information in table
+        release_list = [
+            (78392748291, "family"),
+            (36392738263, "friend"),
+            (272027393729, "chuck"),
+            (373937292739, "barry"),
+            (392729182038, "charlie")
+              ]
 
-#create table and allow reruns 
-cursor.execute("create table IF NOT EXISTS contacts (number text, name text)")
+        #inserts/adds rows
+        cursor.executemany("insert into contacts values (?, ?)", release_list)
+    
+    def add_contact(number, name):
+        contact = [number, name]
+        cursor.executemany("insert into contacts values (?, ?)", contact)
 
 #index to find info faster
 
@@ -39,6 +56,7 @@ cursor.executemany("insert into contacts values (?, ?)", release_list)
               
 #store files permanently
 connection.commit()
+
 
 #print all rows
 for row in cursor.execute("select * from contacts"):
