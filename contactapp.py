@@ -1,32 +1,44 @@
 import sqlite3
 
 
-# UNIQUE constraint block duplicates
 class contactapp:
+
+    
     
     def __init__(self):
-        connection = sqlite3.connect("Contactapp.db")
-        cursor = connection.cursor()
-
+        self.connection = sqlite3.connect("Contactapp.db")
+        self.cursor = self.connection.cursor()
         #create table and allow reruns
-        cursor.execute("create table IF NOT EXISTS contacts (id int primary key, number text, name text)")
-
-        #information in table
-        release_list = [
-            (78392748291, "family"),
-            (36392738263, "friend"),
-            (272027393729, "chuck"),
-            (373937292739, "barry"),
-            (392729182038, "charlie")
-              ]
+        self.create_table()
+        
+        # create table # UNIQUE constraint block duplicates
+        def create_table()self:
+          self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS contacs(
+             release_list = [
+               (78392748291, "family"),
+               (36392738263, "friend"),
+              (272027393729, "chuck"),
+              (373937292739, "barry"),
+              (392729182038, "charlie")
+                              )
+              ''')
+          self.connection.commit()
 
         #inserts/adds rows
-        cursor.executemany("insert into contacts values (?, ?)", release_list)
+        self.cursor.executemany("insert into contacts values (?, ?)", release_list)
     
     def add_contact(number, name):
         contact = [number, name]
         cursor.executemany("insert into contacts values (?, ?)", contact)
-
+    
+    #delete row
+    def delete_contact(number):
+       cursor.execute(
+        "DELETE FROM contacts WHERE number = ?",
+      (number,)
+   )
+    connection.commit()
 #index to find info faster
 
 
@@ -50,7 +62,6 @@ release_list = [
 #inserts/adds rows
 cursor.executemany("insert into contacts values (?, ?)", release_list)
 
-#delete rows
 
 #update rows
               
