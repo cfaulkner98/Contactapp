@@ -31,9 +31,16 @@ class contactapp:
               (373937292739, "barry"),
               (392729182038, "charlie")
             ]
-              
+                      # check table has data
+            self.cursor.execute("SELECT COUNT (*) FROM contacts")
+            (count,) = self.cursor.fetchone()
 
-        self.connection.commit()
+            if count == 0:
+                self.cursor.executemany(
+                    "INSERT INTO contacts (number, name) VALUES (?, ?)",
+                    release_list
+                )
+                self.connection.commit()
 
         #inserts/adds rows
         self.cursor.executemany("insert into contacts values (?, ?)", release_list)
