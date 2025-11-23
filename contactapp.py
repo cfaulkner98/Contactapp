@@ -3,13 +3,15 @@ import sqlite3
 
 class contactapp:
 
-    def __init__(self):
+    def __init__(self, db_name="contactapp.db"):
+                #connect to database
         self.connection = sqlite3.connect("Contactapp.db")
         self.cursor = self.connection.cursor()
-        #create table and allow reruns
+                #create table and index
         self.create_table()
+        self.create_db_indexes()
         
-        # create table # UNIQUE constraint block duplicates
+                # create table # UNIQUE constraint block duplicates
         def create_table()self:
           self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS contacs(
