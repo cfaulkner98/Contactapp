@@ -13,7 +13,7 @@ class contactapp:
         self.insert_initial_contacts()
         
                 # create table # UNIQUE constraint block duplicates
-        def create_table()self:
+        def create_table(self):
           self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS contacs(
              number INTEGER PRIMARY KEY,
@@ -42,14 +42,20 @@ class contactapp:
                 )
                 self.connection.commit()
 
-        #inserts/adds rows
-        self.cursor.executemany("insert into contacts values (?, ?)", release_list)
-    
-    def add_contact(number, name):
-        contact = [number, name]
-        cursor.executemany("insert into contacts values (?, ?)", contact)
-    
-    #delete row
+          ####### add contact
+    def add_contact(self, number, name):
+        try:
+            self.cursor.execute(
+                "INSERT INTO contacts (number, name) VALUES (?, ?)",
+                (number, name)
+            )
+            self.connection.commit()
+            print(f" Added contact: {number} - {name}")
+        except sqlite3.IntegrityError:
+            print(f"[!] a contact with that number {number} already exists")
+
+        
+             ########### delete row
     def delete_contact(number):
        cursor.execute(
         "DELETE FROM contacts WHERE number = ?",
