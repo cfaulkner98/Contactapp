@@ -3,8 +3,6 @@ import sqlite3
 
 class contactapp:
 
-    
-    
     def __init__(self):
         self.connection = sqlite3.connect("Contactapp.db")
         self.cursor = self.connection.cursor()
