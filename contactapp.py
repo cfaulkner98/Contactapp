@@ -21,17 +21,19 @@ class contactapp:
                 )
             """)
           self.connection.commit()
-        
-
-                               = [
+                    
+                    # insert list allow reruns/no duplicates
+        def insert_initial_contacts(self):
+            release_list = [
                (78392748291, "family"),
                (36392738263, "friend"),
               (272027393729, "chuck"),
               (373937292739, "barry"),
               (392729182038, "charlie")
-                              )
-              """)
-          self.connection.commit()
+            ]
+              
+
+        self.connection.commit()
 
         #inserts/adds rows
         self.cursor.executemany("insert into contacts values (?, ?)", release_list)
