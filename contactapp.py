@@ -7,22 +7,30 @@ class contactapp:
                 #connect to database
         self.connection = sqlite3.connect("Contactapp.db")
         self.cursor = self.connection.cursor()
-                #create table and index
+         
         self.create_table()
-        self.create_db_indexes()
+                 #insert initial contacts once
+        self.insert_initial_contacts()
         
                 # create table # UNIQUE constraint block duplicates
         def create_table()self:
-          self.cursor.execute('''
+          self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS contacs(
-             release_list = [
+             number INTEGER PRIMARY KEY,
+             name TEXT NOT NULL
+                )
+            """)
+          self.connection.commit()
+        
+
+                               = [
                (78392748291, "family"),
                (36392738263, "friend"),
               (272027393729, "chuck"),
               (373937292739, "barry"),
               (392729182038, "charlie")
                               )
-              ''')
+              """)
           self.connection.commit()
 
         #inserts/adds rows
