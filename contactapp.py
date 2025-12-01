@@ -92,7 +92,7 @@ class contactapp:
               print(f"[-] updated{number} to { new_name}")
                  
              ########### delete row ########
-             
+
     def delete_contact(self, number):
        self.cursor.execute(
         "DELETE FROM contacts WHERE number = ?",
@@ -104,14 +104,15 @@ class contactapp:
        else:
             print("[-] contact deleted")
     
+
     def close(self):
          self.connection.close()
 
-    def main():
-         app = contactapp()
+def main():
+    app = contactapp()
 
-         while true:
-              print("""
+    while True:
+        print("""
     ==== CONTACT APP =====
     1. Show all contacts
     2. add contact 
@@ -121,44 +122,46 @@ class contactapp:
     6. exit
     """  )
 
-    choice = input("choose (1-6):").strip()
+        choice = input("choose (1-6):").strip()
     
-    if choice == "1":
-        app.show_all()
+        if choice == "1":
+                app.show_all()
 
-    elif choice == "2":
-         try:
-              number = int(input("number (digits only):").strip())
-              name = input("name: ").strip()
-              app.add_contact(number, name)
-         except ValueError:
-              print("[!] number must be an integer")
+        elif choice == "2":
+                try:
+                  number = int(input("number (digits only):").strip())
+                  name = input("name: ").strip()
+                  app.add_contact(number, name)
+                except ValueError:
+                  print("[!] number must be an integer")
 
-    elif choice == "3":
-         try:
-              number = int(input("number to update: ").strip())
-              new_name = input("new name: ").strip()
-              app.update_contact(number, new_name)
-            except ValueError:
-              print("[!] number must be an integer")
-    elif choice == "4":
-         try:
-              number = int(input("number to delete: ").strip())
-              app.delete_contact(number)
-            except ValueError:
-              print("[!] number must be an integer")
+        elif choice == "3":
+                try:
+                  number = int(input("number to update: ").strip())
+                  new_name = input("new name: ").strip()
+                  app.update_contact(number, new_name)
+                except ValueError:
+                  print("[!] number must be an integer")
+            
+        elif choice == "4":
+                try:
+                  number = int(input("number to delete: ").strip())
+                  app.delete_contact(number)
+                except ValueError:
+                  print("[!] number must be an integer")
 
-    elif choice == "5":
-         name = input("name to search: ").strip()
-         app.search_by_name(name)
-
-    elif choice == "6":
-         print("closing")
-         app.close()
-         break
     
-    else:
-         print("[!] pick a number between 1 and 6!")
+        elif choice == "5":
+                name = input("name to search: ").strip()
+                app.search_by_name(name)
 
+        elif choice == "6":
+               print("closing")
+               app.close()
+               break
+    
+        else:
+              print("[!] pick a number between 1 and 6!")
+              
 if __name__ == "__main__":
-     main()
+    main()
