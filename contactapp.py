@@ -9,8 +9,14 @@ class contactapp:
         self.cursor = self.connection.cursor()
          
         self.create_table()
-                 #insert initial contacts once
         self.insert_initial_contacts()
+               ####### in memory list ###### 
+        self.contacts = []
+        self.load_contacts()
+
+    def load_contacts(self):
+         self.cursor.execute("SELECT * FROM contacts")
+         self.contacts = self.cursor.fetchall()
         
                 # create table # UNIQUE constraint block duplicates
     def create_table(self):
@@ -42,17 +48,22 @@ class contactapp:
                 )
                 self.connection.commit()
 
+
           ####### add contact ########
     def add_contact(self, number, name):
+        if any(number == c[0] for c in self.contacts):
+            print(f"[!] contact {number} already exists")
+            return
         try:
             self.cursor.execute(
                 "INSERT INTO contacts (number, name) VALUES (?, ?)",
                 (number, name)
             )
             self.connection.commit()
-            print("[+] Added contact: {number} - {name}")
+            self.contacts.append((number, name))
+            print(f"[+] Added contact: {number} - {name}")
         except sqlite3.IntegrityError:
-            print("[!] that number {number} already exists")
+            print(f"[!] that number {number} already exists")
 
               ######## read #######
 
@@ -86,9 +97,11 @@ class contactapp:
             )
          self.connection.commit()
 
-         if self.cursor.rowcount == 0:
-              print("[!] no such number")
-         else:
+         if self.cursor.rowcount > 0:
+              for i, c in enumerate(self.contacts):
+                   if c[0] == number:
+                        self.contacts[i] = (number, new_name)
+
               print(f"[-] updated{number} to { new_name}")
                  
              ########### delete row ########
@@ -99,9 +112,8 @@ class contactapp:
         (number,)
    )
        self.connection.commit()
-       if self.cursor.rowcount == 0:
-            print("[!] No contact with that number.")
-       else:
+       if self.cursor.rowcount > 0:
+            self.contacts = [c for c in self.contacts if c[0] != number]
             print("[-] contact deleted")
     
 
