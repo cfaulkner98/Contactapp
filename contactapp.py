@@ -51,20 +51,17 @@ class contactapp:
 
           ####### add contact ########
     def add_contact(self, number, name):
-        if any(number == c[0] for c in self.contacts):
-            print(f"[!] contact {number} already exists")
-            return
-        try:
+       try:
             self.cursor.execute(
                 "INSERT INTO contacts (number, name) VALUES (?, ?)",
                 (number, name)
             )
             self.connection.commit()
-            self.contacts.append((number, name))
+            self.load_contacts()
             print(f"[+] Added contact: {number} - {name}")
-        except sqlite3.IntegrityError:
+       except sqlite3.IntegrityError:
             print(f"[!] that number {number} already exists")
-
+            
               ######## read #######
 
     def show_all(self):
