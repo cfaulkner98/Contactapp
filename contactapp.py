@@ -68,7 +68,7 @@ class contactapp:
               ######## read #######
 
     def show_all(self):
-         self.cursor.execute("SELECT * FROM contacts")
+         self.cursor.execute("SELECT * FROM contacts ORDER BY name ASC")
          rows = self.cursor.fetchall()
          for r in rows:
               print(r)
@@ -102,7 +102,7 @@ class contactapp:
                    if c[0] == number:
                         self.contacts[i] = (number, new_name)
 
-              print(f"[-] updated{number} to { new_name}")
+              print(f"[-] updated {number} to { new_name}")
                  
              ########### delete row ########
 
