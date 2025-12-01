@@ -15,7 +15,7 @@ class contactapp:
                 # create table # UNIQUE constraint block duplicates
     def create_table(self):
           self.cursor.execute("""
-            CREATE TABLE IF NOT EXISTS contacs(
+            CREATE TABLE IF NOT EXISTS contacts(
              number INTEGER PRIMARY KEY,
              name TEXT NOT NULL
                 )
@@ -27,9 +27,9 @@ class contactapp:
             release_list = [
                (78392748291, "family"),
                (36392738263, "friend"),
-              (272027393729, "chuck"),
-              (373937292739, "barry"),
-              (392729182038, "charlie")
+               (272027393729, "chuck"),
+               (373937292739, "barry"),
+               (392729182038, "charlie")
             ]
                       # check table has data
             self.cursor.execute("SELECT COUNT (*) FROM contacts")
@@ -42,7 +42,7 @@ class contactapp:
                 )
                 self.connection.commit()
 
-          ####### add contact
+          ####### add contact ########
     def add_contact(self, number, name):
         try:
             self.cursor.execute(
@@ -54,8 +54,45 @@ class contactapp:
         except sqlite3.IntegrityError:
             print("[!] that number {number} already exists")
 
-        
-             ########### delete row
+              ######## read #######
+
+    def show_all(self):
+         self.cursor.execute("SELECT * FROM contacts")
+         rows = self.cursor.fetchall()
+         for r in rows:
+              print(r)
+
+              ###### search by name #######
+    def search_by_name(self, name):
+         self.cursor.execute(
+              "SELECT * FROM contacts WHERE name = ?",
+              (name,)
+         )
+         results = self.cursor.fetchall()
+
+         if results:
+              print("matches: ")
+              for row in results:
+                   print(row)
+         else:
+              print("[!] no contacts with that name")
+
+             ######## update #######
+
+    def update_contact(self, number, new_name):
+         self.cursor.execute(
+              "UPDATE contacts SET name = ? WHERE number = ?",
+              (new_name, number)
+            )
+         self.connection.commit()
+
+         if self.cursor.rowcount == 0:
+              print("[!] no such number")
+         else:
+              print(f"[-] updated{number} to { new_name}")
+                 
+             ########### delete row ########
+             
     def delete_contact(self, number):
        self.cursor.execute(
         "DELETE FROM contacts WHERE number = ?",
