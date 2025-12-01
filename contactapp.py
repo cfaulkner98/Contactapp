@@ -57,43 +57,71 @@ class contactapp:
         
              ########### delete row
     def delete_contact(self, number):
-       cursor.execute(
+       self.cursor.execute(
         "DELETE FROM contacts WHERE number = ?",
-      (number,)
+        (number,)
    )
-    self.connection.commit()
+       self.connection.commit()
+       if self.cursor.rowcount == 0:
+            print("[!] No contact with that number.")
+       else:
+            print("[-] contact deleted")
+    
+    def close(self):
+         self.connection.close()
 
+    def main():
+         app = contactapp()
 
-#index to find info faster
+         while true:
+              print("""
+    ==== CONTACT APP =====
+    1. Show all contacts
+    2. add contact 
+    3. update contact 
+    4. delete contact 
+    5. search by name 
+    6. exit
+    """  )
 
+    choice = input("choose (1-6):").strip()
+    
+    if choice == "1":
+        app.show_all()
 
+    elif choice == "2":
+         try:
+              number = int(input("number (digits only):").strip())
+              name = input("name: ").strip()
+              app.add_contact(number, name)
+         except ValueError:
+              print("[!] number must be an integer")
 
+    elif choice == "3":
+         try:
+              number = int(input("number to update: ").strip())
+              new_name = input("new name: ").strip()
+              app.update_contact(number, new_name)
+            except ValueError:
+              print("[!] number must be an integer")
+    elif choice == "4":
+         try:
+              number = int(input("number to delete: ").strip())
+              app.delete_contact(number)
+            except ValueError:
+              print("[!] number must be an integer")
 
-#search by name 
+    elif choice == "5":
+         name = input("name to search: ").strip()
+         app.search_by_name(name)
 
-#menu
+    elif choice == "6":
+         print("closing")
+         app.close()
+         break
+    
+    else:
+         print("[!] pick a number between 1 and 6!")
 
-
-#inserts/adds rows
-cursor.executemany("insert into contacts values (?, ?)", release_list)
-
-
-#update rows
-              
-#store files permanently
-connection.commit()
-
-
-#print all rows
-for row in cursor.execute("select * from contacts"):
-    print(row)
-
-#print/search certain rows
-print("*******")
-cursor.execute("select * from contacts where name = :c", {"c": "chuck"})
-contacts_search = cursor.fetchall()
-print("contacts_search =", contacts_search)
-
-
-
-connection.close()
+if __name__ == "__main__":
+     main()
