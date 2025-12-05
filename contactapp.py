@@ -22,7 +22,8 @@ class contactapp:
     def create_table(self):
           self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS contacts(
-             number INTEGER PRIMARY KEY,
+             id INTEGER PRIMARY KEY AUTOINCREMENT,
+             number TEXT NOT NULL UNIQUE,
              name TEXT NOT NULL
                 )
             """)
@@ -138,7 +139,7 @@ def main():
 
         elif choice == "2":
                 try:
-                  number = int(input("number (digits only):").strip())
+                  number = input("number:").strip()
                   name = input("name: ").strip()
                   app.add_contact(number, name)
                 except ValueError:
@@ -146,7 +147,7 @@ def main():
 
         elif choice == "3":
                 try:
-                  number = int(input("number to update: ").strip())
+                  number = input("number: ").strip()
                   new_name = input("new name: ").strip()
                   app.update_contact(number, new_name)
                 except ValueError:
@@ -154,7 +155,7 @@ def main():
             
         elif choice == "4":
                 try:
-                  number = int(input("number to delete: ").strip())
+                  number = input("number: ").strip()
                   app.delete_contact(number)
                 except ValueError:
                   print("[!] number must be an integer")
