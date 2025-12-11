@@ -36,7 +36,7 @@ within this app data is stored permenantly and prevents duplications.
 
 ## GitHub Wiki
 
-(https://github.com/cfaulkner98/Contactapp.wiki.git)
+(https://github.com/cfaulkner98/Contactapp/wiki)
 
 ## Author
 
