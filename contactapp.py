@@ -120,7 +120,7 @@ class contactapp:
        if self.cursor.rowcount > 0:
             print("[-] contact deleted")
        else: 
-            print("[!] No contact with that number")
+            print("[!] No contact with that name")
     
 
     def close(self):
@@ -140,34 +140,28 @@ def main():
     6. exit
     """  )
 
-        choice = input("choose (1-6):").strip()
+        choice = input("choose (1-6): ").strip()
     
         if choice == "1":
                 app.show_all()
 
         elif choice == "2":
-                try:
                   number = input("number:").strip()
                   name = input("name: ").strip()
                   app.add_contact(number, name)
-                except ValueError:
-                  print("[!] number must be an integer")
+              
+          
 
         elif choice == "3":
-                try:
                   number = input("number: ").strip()
                   new_name = input("new name: ").strip()
                   app.update_contact(number, new_name)
-                except ValueError:
-                  print("[!] number must be an integer")
+                
             
         elif choice == "4":
-                try:
-                  name = input("name: ").strip()
+                  number = input("number to delete: ").strip()
                   app.delete_contact(number)
-                except ValueError:
-                  print("[!] number must be an integer")
-
+        
     
         elif choice == "5":
                 name = input("name to search: ").strip()
