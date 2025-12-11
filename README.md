@@ -33,7 +33,10 @@ within this app data is stored permenantly and prevents duplications.
 4. Delete contact
 5. Search
 6. Exit
-   
+
+## GitHub Wiki
+
+(https://github.com/cfaulkner98/Contactapp.wiki.git)
 
 ## Author
 
