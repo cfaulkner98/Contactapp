@@ -1,1 +1,1 @@
-i have created a contacts database in which you are able to store names permanently, add, search
+i have created a contacts database. for this you are able to store names permanently, add new contacts, search for a name that is currently in the database, update any existing numbers and delete any contact from the database. 
