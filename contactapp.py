@@ -10,7 +10,7 @@ class contactapp:
          
         self.create_table()
         self.insert_initial_contacts()
-        self.remove_duplicates()
+        
                ####### in memory list ###### 
         self.contacts = []
         self.load_contacts()
@@ -64,7 +64,7 @@ class contactapp:
                 )
                 except sqlite3.IntegrityError:
                      pass
-                self.connection.commit()
+            self.connection.commit()
 
 
           ####### add contact ########
