@@ -56,11 +56,14 @@ class contactapp:
             self.cursor.execute("SELECT COUNT (*) FROM contacts")
             (count,) = self.cursor.fetchone()
 
-            if count == 0:
-                self.cursor.executemany(
-                    "INSERT INTO contacts (number, name) VALUES (?, ?)",
-                    release_list
+            for number, name in release_list:
+                try:
+                    self.cursor.execute(
+                       "INSERT INTO contacts (number, name) VALUES (?, ?)",
+                       (number, name)
                 )
+                except sqlite3.IntegrityError:
+                     pass
                 self.connection.commit()
 
 
