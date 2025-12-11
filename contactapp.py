@@ -32,16 +32,6 @@ class contactapp:
 
            ######### REMOVE DUPLICATES ######## 
      
-    def remove_duplicates(self):
-         self.cursor.execute("""
-             DELETE FROM contacts
-             where id NOT IN (
-                             SELECT MIN(id)
-                             FROM contacts
-                             GROUP BY number
-             )
-           """ )
-         self.connection.commit()
                     
                     # insert list allow reruns/no duplicates
     def insert_initial_contacts(self):
@@ -176,4 +166,4 @@ def main():
               print("[!] pick a number between 1 and 6!")
               
 if __name__ == "__main__":
-    main()
+      main()
