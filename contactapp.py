@@ -43,9 +43,6 @@ class contactapp:
                (392729182038, "charlie")
             ]
                       # check table has data
-            self.cursor.execute("SELECT COUNT (*) FROM contacts")
-            (count,) = self.cursor.fetchone()
-
             for number, name in release_list:
                 try:
                     self.cursor.execute(
