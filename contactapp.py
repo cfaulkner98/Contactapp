@@ -100,17 +100,19 @@ class contactapp:
              ########### delete contact  ########
 
     def delete_contact(self, number):
-       self.cursor.execute("DELETE FROM contacts WHERE number = ?",(number,))
-   
-       self.connection.commit()
-       if self.cursor.rowcount > 0:
-            print("[-] contact deleted")
+       for i, c in enumerate(self.contacts):
+             if c["number"] == number:
+                   del self.contacts[i]
+                   print("[-] contact deleted")
+                   break
        else: 
-            print("[!] No contact with that name")
+             print("[!] no contact with that number")
+
+       self.cursor.execute("DELETE FROM contacts WHERE number = ?", (number,))
+       self.connection.commit
     
 
-    def close(self):
-         self.connection.close()
+    
 
 def main():
     app = contactapp()
