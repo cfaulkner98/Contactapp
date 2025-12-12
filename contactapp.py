@@ -69,10 +69,8 @@ class contactapp:
               ######## read #######
 
     def show_all(self):
-         self.cursor.execute("SELECT * FROM contacts ORDER BY name ASC")
-         rows = self.cursor.fetchall()
-         for r in rows:
-              print(r)
+         for c in sorted(self.contacts, key=lambda x: x["name"]):
+               print(c)
 
               ###### search by name #######
     def search_by_name(self, name):
