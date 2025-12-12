@@ -30,7 +30,6 @@ class contactapp:
             """)
           self.connection.commit()
 
-           ######### REMOVE DUPLICATES ######## 
      
                     
                     # insert list allow reruns/no duplicates
@@ -77,14 +76,16 @@ class contactapp:
 
               ###### search by name #######
     def search_by_name(self, name):
-         self.cursor.execute("SELECT * FROM contacts WHERE name = ?",
-              (name,))
-         rows = self.cursor.fetchall()
-         if rows:
-              for row in rows:
-                   print(row)
+         found = []
+         for contact in self.contacts:
+               if contact ["name"].lower() == name.lower():
+                     found.append(contact)
+         if found:
+               for c in found:
+                     print(c)
          else:
-              print("[!] no contacts with that name")
+               print("[!] no contacts with that name")
+
 
              ######## update #######
 
@@ -98,7 +99,7 @@ class contactapp:
          if self.cursor.rowcount > 0:
               print(f"[-] updated {number} to { new_name}")
                  
-             ########### delete row ########
+             ########### delete contact  ########
 
     def delete_contact(self, number):
        self.cursor.execute("DELETE FROM contacts WHERE number = ?",(number,))
