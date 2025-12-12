@@ -19,6 +19,10 @@ within this app data is stored permenantly and prevents duplications.
 - Python 3
 - SQLite3 (Which is built-in with Python)
 
+## How to run 
+
+To run this program, you run the script through your IDE terminal.
+
 ## Edge cases / Notes
 
 - Duplicates are not allowed
